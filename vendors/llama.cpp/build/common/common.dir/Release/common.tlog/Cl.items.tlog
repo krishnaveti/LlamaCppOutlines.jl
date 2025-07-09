@@ -1,0 +1,13 @@
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\arg.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\arg.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\chat-parser.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\chat-parser.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\chat.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\chat.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\common.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\common.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\console.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\console.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\json-partial.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\json-partial.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\json-schema-to-grammar.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\json-schema-to-grammar.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\llguidance.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\llguidance.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\log.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\log.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\ngram-cache.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\ngram-cache.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\regex-partial.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\regex-partial.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\sampling.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\sampling.obj
+C:\dev\LlamaCppOutlines\vendors\llama.cpp\common\speculative.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\common\common.dir\Release\speculative.obj

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-adapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-arch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-batch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-chat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-cparams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-grammar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-hparams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-kv-cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-kv-cache-unified.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-kv-cache-unified-iswa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-kv-cache-recurrent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-mmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-model-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-model-saver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-quant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-sampling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\llama-vocab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\unicode-data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\unicode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\include\llama.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\unicode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\dev\LlamaCppOutlines\vendors\llama.cpp\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{38A2671C-A2F6-3B0F-8FEA-DE1A7846612D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D91F8399-7CC1-3F1A-8AFB-65CD4344F12C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

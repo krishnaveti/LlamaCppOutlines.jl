@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\x64\Release\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\bin\Release\ggml-base.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\bin\Release\ggml-cpu.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\bin\Release\ggml.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\bin\Release\llama.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\bin\Release\llama-bench.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
