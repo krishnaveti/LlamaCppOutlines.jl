@@ -219,3 +219,11 @@ Makefile
 # Temporary Julia files
 *.jl.tmp
 *.jl.backup
+
+# Vendor directories
+# --- Force include vendored llama.cpp binaries and build ---
+!vendors/llama.cpp/build/
+!vendors/llama.cpp/build/**
+
+# --- Force include outlines_core.dll in release folder ---
+!vendors/outlines-core/target/
