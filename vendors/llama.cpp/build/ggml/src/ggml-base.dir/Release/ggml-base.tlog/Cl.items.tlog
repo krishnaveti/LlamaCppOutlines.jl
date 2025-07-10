@@ -1,8 +1,0 @@
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml.c;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml.c.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml.cpp.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml-alloc.c;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml-alloc.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml-backend.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml-backend.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml-opt.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml-opt.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml-threading.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml-threading.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\ggml-quants.c;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\ggml-quants.obj
-C:\dev\LlamaCppOutlines\vendors\llama.cpp\ggml\src\gguf.cpp;C:\dev\LlamaCppOutlines\vendors\llama.cpp\build\ggml\src\ggml-base.dir\Release\gguf.obj
