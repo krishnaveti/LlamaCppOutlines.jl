@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: >
+  If you use LlamaCppOutlines.jl in your work and find it helpful, please cite it using the following metadata.
+title: LlamaCppOutlines.jl
+version: 0.1.0
+doi: 10.5281/zenodo.15857210
+date-released: 2025-07-10
+authors:
+  - family-names: K S
+    given-names: Vikram
+    orcid: https://orcid.org/0009-0008-3118-411X
+    affiliation: University of Cincinnati
+repository-code: https://github.com/krishnaveti/llamacpp-outlines
+license: MIT
+keywords:
+  - Julia
+  - LLaMA
+  - GGUF
+  - multimodal
+  - Outlines
+  - LoRA
+  - inference
+  - structured generation
+  - constrained decoding
+  - large language models
