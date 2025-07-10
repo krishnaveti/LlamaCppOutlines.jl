@@ -12,7 +12,7 @@ import .OutlinesCppAPI as outlines
 using JSON3, Random
 
 # Export main user-facing functions
-export load_and_initialize, load_and_initialize_mtmd
+export load_and_initialize, load_and_initialize_mtmd, init_sampler_chain
 export generate_with_sampling, generate_mtmd_with_sampling
 export greedy_constrained_generation, enhanced_constrained_generation
 export greedy_mtmd_constrained_generation, enhanced_mtmd_constrained_generation
@@ -30,19 +30,19 @@ export train_lora_to_gguf, list_lora_gguf_files
 # Initialize APIs with proper vendor paths
 function init_apis!()
     println("🔧 Initializing LlamaCppOutlines APIs...")
-    
+
     # Initialize LLaMA API
     llama_dll = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "llama.dll")
     llama.init!(llama_dll)
-    
+
     # Initialize MTMD API  
     mtmd_dll = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "mtmd.dll")
     mtmd.init!(mtmd_dll)
-    
+
     # Initialize Outlines API
     outlines_dll = joinpath(@__DIR__, "..", "vendors", "outlines-core", "target", "release", "outlines_core.dll")
     outlines.init!(outlines_dll)
-    
+
     println("✅ All APIs initialized successfully!")
 end
 
@@ -76,7 +76,7 @@ model, model_context, vocab = load_and_initialize("model.gguf")
 """
 function init_apis_not_windows!()
     println("🔧 Initializing LlamaCppOutlines APIs for non-Windows platforms...")
-    
+
     # Determine library extension and prefix based on platform
     if Sys.islinux()
         lib_ext = ".so"
@@ -90,9 +90,9 @@ function init_apis_not_windows!()
         error("Unsupported platform: $(Sys.MACHINE)\n" *
               "This function is for Linux/macOS only. Windows users should use init_apis!().")
     end
-    
+
     println("   Platform detected: $platform_name")
-    
+
     # Initialize LLaMA API
     llama_lib = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "$(lib_prefix)llama$(lib_ext)")
     if !isfile(llama_lib)
@@ -104,7 +104,7 @@ function init_apis_not_windows!()
               "  make -j\$(nproc)")
     end
     llama.init!(llama_lib)
-    
+
     # Initialize MTMD API  
     mtmd_lib = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "$(lib_prefix)mtmd$(lib_ext)")
     if !isfile(mtmd_lib)
@@ -116,7 +116,7 @@ function init_apis_not_windows!()
               "  make -j\$(nproc)")
     end
     mtmd.init!(mtmd_lib)
-    
+
     # Initialize Outlines API
     outlines_lib = joinpath(@__DIR__, "..", "vendors", "outlines-core", "target", "release", "$(lib_prefix)outlines_core$(lib_ext)")
     if !isfile(outlines_lib)
@@ -126,10 +126,10 @@ function init_apis_not_windows!()
               "  cargo build --release")
     end
     outlines.init!(outlines_lib)
-    
+
     println("✅ All APIs initialized successfully for $platform_name!")
     println("   📚 LLaMA: $llama_lib")
-    println("   🖼️  MTMD: $mtmd_lib") 
+    println("   🖼️  MTMD: $mtmd_lib")
     println("   🎯 Outlines: $outlines_lib")
 end
 

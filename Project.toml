@@ -1,6 +1,7 @@
 name = "LlamaCppOutlines"
-uuid = "bf474086-d904-4627-a373-714f67070495"
+uuid = "cf61004f-919f-4111-a040-3ccdc0268dd3"
 version = "0.1.0"
+authors = ["vikram <krishnvv@ucmail.uc.edu"]
 
 [deps]
 JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
@@ -9,5 +10,6 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-julia = "1.6"
 JSON3 = "1.0"
+Test = "1.11.0"
+julia = "1.6"
