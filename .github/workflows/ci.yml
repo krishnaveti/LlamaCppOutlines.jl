@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.9'  # Or 1.10, if you prefer
+
+      - name: Reset General registry to avoid dirty state
+        run: julia -e '
+          using Pkg
+          Pkg.Registry.rm("General");
+          Pkg.Registry.add(RegistrySpec(url = "https://github.com/JuliaRegistries/General.git"))
+        '
+
+      - name: Instantiate and test
+        run: julia -e '
+          using Pkg
+          Pkg.instantiate()
+          Pkg.build()
+          Pkg.test()
+        '
