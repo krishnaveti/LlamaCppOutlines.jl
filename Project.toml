@@ -1,7 +1,7 @@
 name = "LlamaCppOutlines"
 uuid = "cf61004f-919f-4111-a040-3ccdc0268dd3"
-version = "0.1.0"
-authors = ["vikram <krishnvv@ucmail.uc.edu"]
+version = "0.2.0"
+authors = ["vikram <krishnvv@ucmail.uc.edu>"]
 
 [deps]
 JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
