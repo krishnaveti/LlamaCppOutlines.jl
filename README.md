@@ -14,7 +14,13 @@ A Julia package for LLaMA inference with structured output generation using Outl
 
 ```julia
 Pkg.add(url="https://github.com/krishnaveti/LlamaCppOutlines.jl")
+or
+] add LlamaCppOutlines
 ```
+**Warning**: After installing the package, you may need to unblock the DLL files to allow Julia to load them.
+Go to .julia/packages/LlamaCppOutlines/.../vendors/llama.cpp/build/bin/Release/, right-click each .dll, open "Properties", then "Security" and check "allow" for the appropriate user.
+
+Will fix in the future package updates. 
 
 ## Quick Start
 
