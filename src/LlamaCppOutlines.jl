@@ -9,7 +9,7 @@ import .LlamaCppAPI as llama
 import .MtmdCppAPI as mtmd
 import .OutlinesCppAPI as outlines
 
-using JSON3, Random
+using JSON3, Random, CUDA, Pkg.Artifacts
 
 # Export main user-facing functions
 export load_and_initialize, load_and_initialize_mtmd, init_sampler_chain
@@ -17,7 +17,7 @@ export generate_with_sampling, generate_mtmd_with_sampling
 export greedy_constrained_generation, enhanced_constrained_generation
 export greedy_mtmd_constrained_generation, enhanced_mtmd_constrained_generation
 export SamplingParams, creative_params, balanced_params, focused_params, greedy_params
-export init_apis!, init_apis_not_windows!
+export init_apis!
 
 # Export LoRA functions
 export load_lora_adapter, free_lora_adapter, set_adapter_lora, rm_adapter_lora, clear_adapter_lora
@@ -30,19 +30,47 @@ export train_lora_to_gguf, list_lora_gguf_files
 # Initialize APIs with proper vendor paths
 function init_apis!()
     println("🔧 Initializing LlamaCppOutlines APIs...")
-
+    
+    # Get artifact paths
+    artifacts_toml = joinpath(@__DIR__, "..", "Artifacts.toml")
+    
+    # Determine which artifact to use (GPU if available, CPU otherwise)
+    artifact_name = "LlamaCppOutlines_CPU"  # Default to CPU
+    
+    # Try to detect GPU support
+    try
+        if CUDA.functional()
+            gpu_hash = artifact_hash("LlamaCppOutlines_GPU", artifacts_toml)
+            if gpu_hash !== nothing && artifact_exists(gpu_hash)
+                artifact_name = "LlamaCppOutlines_GPU"
+                println("🚀 GPU detected - using CUDA-accelerated binaries")
+            end
+        end
+    catch
+        println("ℹ️  Using CPU binaries")
+    end
+    
+    # Get the artifact path
+    hash = artifact_hash(artifact_name, artifacts_toml)
+    if hash === nothing
+        error("❌ LlamaCpp binaries not found in artifacts")
+    end
+    
+    artifact_path = artifact_path(hash)
+    lib_path = joinpath(artifact_path, "lib")
+    
     # Initialize LLaMA API
-    llama_dll = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "llama.dll")
+    llama_dll = joinpath(lib_path, "llama.dll")
     llama.init!(llama_dll)
-
+    
     # Initialize MTMD API  
-    mtmd_dll = joinpath(@__DIR__, "..", "vendors", "llama.cpp", "build", "bin", "Release", "mtmd.dll")
+    mtmd_dll = joinpath(lib_path, "mtmd.dll")
     mtmd.init!(mtmd_dll)
-
+    
     # Initialize Outlines API
-    outlines_dll = joinpath(@__DIR__, "..", "vendors", "outlines-core", "target", "release", "outlines_core.dll")
+    outlines_dll = joinpath(lib_path, "outlines_core.dll")
     outlines.init!(outlines_dll)
-
+    
     println("✅ All APIs initialized successfully!")
 end
 
@@ -75,7 +103,7 @@ model, model_context, vocab = load_and_initialize("model.gguf")
 - Displays loaded library paths for verification
 """
 function init_apis_not_windows!()
-    println("🔧 Initializing LlamaCppOutlines APIs for non-Windows platforms...")
+    @warn "init_apis_not_windows! is deprecated. Non-Windows support will be added in future releases, the current support is only Windows."
 
     # Determine library extension and prefix based on platform
     if Sys.islinux()
