@@ -106,7 +106,7 @@ function init_apis!()
     end
     
     artifact_dir = artifact_path(hash)
-    lib_path = joinpath(artifact_dir, "lib")
+    lib_path = joinpath(artifact_dir, "bin")
     
     # Initialize LLaMA API
     llama_dll = joinpath(lib_path, "llama.dll")
