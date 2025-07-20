@@ -1,5 +1,5 @@
 [LlamaCppOutlines_CPU]
-git-tree-sha1 = "cc94eb1fb9b61fb7882341fe36552a2872ff74b36d0c801716bc2152037bbb12"
+git-tree-sha1 = "0000000000000000000000000000000000000000"
 lazy = true
 
     [[LlamaCppOutlines_CPU.download]]
@@ -9,7 +9,7 @@ lazy = true
     [LlamaCppOutlines_CPU.target.x86_64-w64-mingw32]
 
 [LlamaCppOutlines_GPU]
-git-tree-sha1 = "7502bf0cacfbd4eddb8358bc680e11daf5eb4be47bac6fd5ec163ee8901db3f9"
+git-tree-sha1 = "0000000000000000000000000000000000000000"
 lazy = true
 
     [[LlamaCppOutlines_GPU.download]]
