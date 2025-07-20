@@ -28,6 +28,55 @@ export list_adapters, get_active_adapter
 export train_lora_to_gguf, list_lora_gguf_files
 
 # Initialize APIs with proper vendor paths
+"""
+    init_apis!()
+
+Initialize LlamaCppOutlines APIs with automatic binary management and GPU detection.
+This function automatically downloads and configures the appropriate binaries for your system:
+
+- **Windows x64 (CPU)**: Downloads CPU-optimized llama.cpp binaries
+- **Windows x64 (GPU)**: Downloads CUDA-accelerated binaries when NVIDIA GPU is detected
+- **Auto-detection**: Automatically selects GPU binaries if CUDA is functional, falls back to CPU otherwise
+
+# Features
+
+- **Zero configuration**: No manual binary building required
+- **Automatic GPU detection**: Uses `CUDA.functional()` to detect GPU support
+- **Artifact management**: Downloads and caches binaries automatically via Julia's artifact system
+- **Complete toolset**: Includes all llama.cpp utilities (CLI, server, quantization, fine-tuning, LoRA export, etc.)
+- **Outlines integration**: Includes outlines-core for structured generation
+
+# Example
+
+```julia
+using LlamaCppOutlines
+
+# Initialize APIs (downloads binaries automatically)
+init_apis!()
+
+# APIs are now ready to use
+model, model_context, vocab = load_and_initialize("model.gguf")
+```
+
+# Platform Support
+
+- ✅ **Windows x64**: Fully supported with automatic binary downloads
+- 🔄 **Linux/macOS**: Coming in future releases
+
+# GPU Requirements
+
+For GPU acceleration, ensure you have:
+- NVIDIA GPU with CUDA support
+- NVIDIA drivers installed
+- CUDA.jl working: `using CUDA; CUDA.functional()` should return `true`
+
+# Notes
+
+- Binaries are cached locally after first download
+- Will display whether GPU or CPU binaries are being used
+- No internet connection required after initial download
+- Falls back gracefully to CPU binaries if GPU detection fails
+"""
 function init_apis!()
     println("🔧 Initializing LlamaCppOutlines APIs...")
     
@@ -56,8 +105,8 @@ function init_apis!()
         error("❌ LlamaCpp binaries not found in artifacts")
     end
     
-    artifact_path = artifact_path(hash)
-    lib_path = joinpath(artifact_path, "lib")
+    artifact_dir = artifact_path(hash)
+    lib_path = joinpath(artifact_dir, "lib")
     
     # Initialize LLaMA API
     llama_dll = joinpath(lib_path, "llama.dll")
