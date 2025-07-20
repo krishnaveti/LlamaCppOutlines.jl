@@ -77,50 +77,97 @@ For GPU acceleration, ensure you have:
 - No internet connection required after initial download
 - Falls back gracefully to CPU binaries if GPU detection fails
 """
+using Pkg.Artifacts
+using CUDA  # Optional, for automatic GPU detection
+
 function init_apis!()
     println("🔧 Initializing LlamaCppOutlines APIs...")
     
     # Get artifact paths
     artifacts_toml = joinpath(@__DIR__, "..", "Artifacts.toml")
     
-    # Determine which artifact to use (GPU if available, CPU otherwise)
+    # Force download artifacts upfront
+    println("📦 Ensuring binaries are available...")
+    
+    # Always ensure CPU binaries are available (fallback)
+    try
+        print("   Downloading CPU binaries... ")
+        ensure_artifact_installed("LlamaCppOutlines_CPU", artifacts_toml)
+        println("✅")
+    catch e
+        println("❌")
+        @warn "Failed to download CPU binaries" exception=e
+        error("Cannot proceed without CPU binaries. Please check your internet connection.")
+    end
+    
+    # Determine which artifact to use
     artifact_name = "LlamaCppOutlines_CPU"  # Default to CPU
     
-    # Try to detect GPU support
+    # Try to detect and download GPU support
+    gpu_available = false
     try
         if CUDA.functional()
+            print("   GPU detected, downloading CUDA binaries... ")
+            ensure_artifact_installed("LlamaCppOutlines_GPU", artifacts_toml)
+            println("✅")
+            
             gpu_hash = artifact_hash("LlamaCppOutlines_GPU", artifacts_toml)
             if gpu_hash !== nothing && artifact_exists(gpu_hash)
                 artifact_name = "LlamaCppOutlines_GPU"
-                println("🚀 GPU detected - using CUDA-accelerated binaries")
+                gpu_available = true
+                println("🚀 Using GPU-accelerated binaries")
             end
+        else
+            println("ℹ️  No GPU detected, using CPU binaries")
         end
-    catch
-        println("ℹ️  Using CPU binaries")
+    catch e
+        println("⚠️  GPU detection failed, falling back to CPU binaries")
+        @warn "GPU setup failed" exception=e
     end
     
-    # Get the artifact path
+    # Get the selected artifact path
     hash = artifact_hash(artifact_name, artifacts_toml)
     if hash === nothing
-        error("❌ LlamaCpp binaries not found in artifacts")
+        error("❌ Selected binaries not found in artifacts")
     end
     
     artifact_dir = artifact_path(hash)
-    lib_path = joinpath(artifact_dir, "bin")
+    bin_path = joinpath(artifact_dir, "bin")
     
-    # Initialize LLaMA API
-    llama_dll = joinpath(lib_path, "llama.dll")
-    llama.init!(llama_dll)
+    # Verify binaries exist
+    llama_dll = joinpath(bin_path, "llama.dll")
+    mtmd_dll = joinpath(bin_path, "mtmd.dll")
+    outlines_dll = joinpath(bin_path, "outlines_core.dll")
     
-    # Initialize MTMD API  
-    mtmd_dll = joinpath(lib_path, "mtmd.dll")
-    mtmd.init!(mtmd_dll)
+    for (name, path) in [("llama.dll", llama_dll), ("mtmd.dll", mtmd_dll), ("outlines_core.dll", outlines_dll)]
+        if !isfile(path)
+            error("❌ Required binary not found: $name at $path")
+        end
+    end
     
-    # Initialize Outlines API
-    outlines_dll = joinpath(lib_path, "outlines_core.dll")
-    outlines.init!(outlines_dll)
-    
-    println("✅ All APIs initialized successfully!")
+    # Initialize APIs
+    try
+        print("🔗 Loading LLaMA API... ")
+        llama.init!(llama_dll)
+        println("✅")
+        
+        print("🔗 Loading MTMD API... ")
+        mtmd.init!(mtmd_dll)
+        println("✅")
+        
+        print("🔗 Loading Outlines API... ")
+        outlines.init!(outlines_dll)
+        println("✅")
+        
+        if gpu_available
+            println("🎉 All APIs initialized successfully with GPU acceleration!")
+        else
+            println("🎉 All APIs initialized successfully with CPU!")
+        end
+        
+    catch e
+        error("❌ Failed to load APIs: $e")
+    end
 end
 
 """
