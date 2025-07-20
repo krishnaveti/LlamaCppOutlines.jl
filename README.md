@@ -14,6 +14,8 @@ A Julia package for LLaMA inference with structured output generation using Outl
 ## Installation
 
 ```julia
+] add LlamaCppOutlines
+or
 Pkg.add(url="https://github.com/krishnaveti/LlamaCppOutlines.jl")
 ```
 **Warning**: Current support is only for Windows.
