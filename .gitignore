@@ -220,13 +220,5 @@ Makefile
 *.jl.tmp
 *.jl.backup
 
-# Ignore everything in build output folders
-vendors/llama.cpp/build/
-
-# But allow this specific path
-!vendors/llama.cpp/build/bin/Release/
-!vendors/llama.cpp/build/bin/Release/llama.dll
-!vendors/llama.cpp/build/bin/Release/mtmd.dll
-
-# --- Force include outlines_core.dll in release folder ---
-!vendors/outlines-core/target/
+# Ignore vendors, using artifact-based binaries
+vendors/
