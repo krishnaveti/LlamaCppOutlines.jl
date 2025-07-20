@@ -1,6 +1,6 @@
 name = "LlamaCppOutlines"
 uuid = "cf61004f-919f-4111-a040-3ccdc0268dd3"
-version = "0.1.1"
+version = "1.0.1"
 authors = ["vikram <krishnvv@ucmail.uc.edu>"]
 
 [deps]
