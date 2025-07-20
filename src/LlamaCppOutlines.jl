@@ -77,9 +77,6 @@ For GPU acceleration, ensure you have:
 - No internet connection required after initial download
 - Falls back gracefully to CPU binaries if GPU detection fails
 """
-using Pkg.Artifacts
-using CUDA  # Optional, for automatic GPU detection
-
 function init_apis!()
     println("🔧 Initializing LlamaCppOutlines APIs...")
     
