@@ -9,18 +9,14 @@ A Julia package for LLaMA inference with structured output generation using Outl
 - **Constrained Generation**: Structured output using JSON schema constraints
 - **Enhanced Sampling**: Multiple sampling strategies (greedy, top-k, top-p, temperature)
 - **LoRA Support**: Dynamic adapter loading and switching
+- **GPU Support**: Automatic CUDA detection
 
 ## Installation
 
 ```julia
 Pkg.add(url="https://github.com/krishnaveti/LlamaCppOutlines.jl")
-or
-] add LlamaCppOutlines
 ```
-**Warning**: After installing the package, you may need to unblock the DLL files to allow Julia to load them.
-Go to .julia/packages/LlamaCppOutlines/.../vendors/llama.cpp/build/bin/Release/, right-click each .dll, open "Properties", then "Security" and check "allow" for the appropriate user.
-
-Will fix in the future package updates. 
+**Warning**: Current support is only for Windows.
 
 ## Quick Start
 
@@ -215,13 +211,10 @@ free_all_adapters!(manager)
 
 ### System Dependencies
 
-- **LLaMA.cpp**: Binary builds in `vendors/llama.cpp/build/bin/Release/`
-  - `llama.dll` (Windows) or `libllama.so` (Linux)
-  - `mtmd.dll` (Windows) or `libmtmd.so` (Linux)
-- **Outlines-core**: Binary builds in `vendors/outlines-core/target/release/`
-  - `outlines_core.dll` (Windows) or `liboutlines_core.so` (Linux)
+- **LLaMA.cpp**: Binary builds through artifact
+- **Outlines-core**: Binary builds through artifact
 
-⚠️ **Linux/macOS Users**: This package currently includes Windows binaries only. Linux and macOS users need to build the native libraries themselves.
+⚠️ **Linux/macOS Users**: This package currently includes Windows binaries only. Will be updating soon.
 
 ### Authentication Requirements
 
@@ -248,103 +241,6 @@ For LoRA training (automatically installed by `train_lora_to_gguf`):
 ```bash
 pip install torch transformers peft datasets huggingface_hub python-dotenv accelerate
 ```
-
-## Linux/macOS Build Instructions
-
-Since this package currently includes Windows binaries only, Linux and macOS users need to build the native libraries. The vendor source code and build systems are included.
-
-### Building the Required Binaries
-
-**You must build these binaries BEFORE using the API.** The package will not work without them.
-
-#### Step 1: Build LLaMA.cpp Libraries
-
-**Prerequisites:**
-- CMake (3.14+)
-- C++ compiler (GCC/Clang)
-
-**Build Commands:**
-```bash
-cd vendors/llama.cpp
-mkdir -p build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DLLAMA_BUILD_SHARED=ON -DLLAMA_BUILD_SERVER=OFF
-make -j$(nproc)
-```
-
-**Expected Output:**
-- `build/bin/Release/libllama.so` (Linux) or `build/bin/Release/libllama.dylib` (macOS)
-- `build/bin/Release/libmtmd.so` (Linux) or `build/bin/Release/libmtmd.dylib` (macOS)
-
-#### Step 2: Build Outlines-core Library
-
-**Prerequisites:**
-- Rust/Cargo (install from https://rustup.rs/)
-
-**Build Commands:**
-```bash
-cd vendors/outlines-core
-cargo build --release
-```
-
-**Expected Output:**
-- `target/release/liboutlines_core.so` (Linux) or `target/release/liboutlines_core.dylib` (macOS)
-
-#### Step 3: Verify Build Success
-
-Check that all required libraries exist:
-```bash
-# Check LLaMA.cpp libraries
-ls -la vendors/llama.cpp/build/bin/Release/libllama.*
-ls -la vendors/llama.cpp/build/bin/Release/libmtmd.*
-
-# Check Outlines-core library  
-ls -la vendors/outlines-core/target/release/liboutlines_core.*
-```
-
-You should see the appropriate `.so` (Linux) or `.dylib` (macOS) files.
-
-### Alternative: Using BinaryBuilder.jl
-
-If you prefer to build from within Julia:
-
-```julia
-] add BinaryBuilder
-
-# Build LLaMA.cpp
-cd("vendors/llama.cpp")
-run(`cmake -B build -DCMAKE_BUILD_TYPE=Release -DLLAMA_BUILD_SHARED=ON`)
-run(`cmake --build build --config Release`)
-
-# Build Outlines-core
-cd("vendors/outlines-core")
-run(`cargo build --release`)
-```
-
-### Using the Package After Building
-
-After building the required binaries, you can use the package with the special Linux/macOS initialization function:
-
-```julia
-using LlamaCppOutlines
-
-# For Linux/macOS users (after building binaries)
-init_apis_not_windows!()
-
-# Then use the API normally
-model, model_context, vocab = load_and_initialize("path/to/model.gguf")
-result = generate_with_sampling("Hello world!", model=model, model_context=model_context, vocab=vocab)
-```
-
-**The `init_apis_not_windows!()` function:**
-- Automatically detects your platform (Linux vs macOS)
-- Looks for the correct library files:
-  - Linux: `libllama.so`, `libmtmd.so`, `liboutlines_core.so`
-  - macOS: `libllama.dylib`, `libmtmd.dylib`, `liboutlines_core.dylib`
-- Provides helpful error messages if libraries are not found
-- Shows loaded library paths for verification
-
-**Note:** Windows users should continue using `init_apis!()` instead.
-
 Once initialized, all functionality works identically to Windows.
 
 ## Directory Structure
@@ -365,10 +261,8 @@ LlamaCppOutlines/
 │   ├── test_multimodal_api.jl  # Multimodal tests
 │   ├── test_outlines_api.jl    # Outlines tests
 │   └── test_integration.jl     # Integration tests
-├── vendors/
-│   ├── llama.cpp/              # LLaMA.cpp source and binaries
-│   └── outlines-core/          # Outlines-core source and binaries
 └── Project.toml
+└── Artifacts.toml
 ```
 
 ## Testing
